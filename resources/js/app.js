@@ -101,14 +101,16 @@ function _formAjaxAsync(attr) {
 
                 $('#daterangepicker').val(defaultValue);
                 
+                toaster.show();
             } else {
                 $.each(res.error, function(k, v) {
                 	f.find('span.'+k+'-error').text(v[0]);
                 })
             }
+
+            $('input[name="_token"]').val(res.csrf_token)
         },
         complete: function(res) {
-        	toaster.show();
             b.removeAttr('disabled').text(t);
         }
     });
